@@ -25,53 +25,76 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Text(
-            'This Is The Finest Community In Your Surrounding!',
-            overflow: TextOverflow.visible,
-            softWrap: true,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 27,
-              fontWeight: FontWeight.bold,
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Text(
+              'This Is The Finest Community In Your Surrounding!',
+              overflow: TextOverflow.visible,
+              softWrap: true,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 27,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
-        Components.buildCustomSearchBar(widget._controller),
-        TabBar(
-            isScrollable: true,
-            padding: const EdgeInsets.all(8.0),
-            labelColor: Colors.orange,
-            labelStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
+          Components.buildCustomSearchBar(widget._controller),
+          TabBar(
+              isScrollable: true,
+              padding: const EdgeInsets.all(8.0),
+              labelColor: Colors.orange,
+              labelStyle: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
+              unselectedLabelColor: Colors.grey,
+              indicator: const BoxDecoration(
+                borderRadius: null,
+              ),
+              controller: _tabController,
+              tabs: const [
+                Text('All Events'),
+                Text('Ongoing Events'),
+                Text('Upcoming Events'),
+              ]),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                Components.customEventCard(),
+                Components.customEventCard(),
+                Components.customEventCard(),
+                Components.customEventCard(),
+                Components.customEventCard(),
+              ],
             ),
-            unselectedLabelColor: Colors.grey,
-            indicator: const BoxDecoration(
-              borderRadius: null,
-            ),
-            controller: _tabController,
-            tabs: const [
-              Text('All Events'),
-              Text('Ongoing Events'),
-              Text('Upcoming Events'),
-            ]),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
+          ),
+          Row(
             children: [
-              Components.customEventCard(),
-              Components.customEventCard(),
-              Components.customEventCard(),
-              Components.customEventCard(),
-              Components.customEventCard(),
+              Container(
+                margin: const EdgeInsets.all(3.0),
+                padding: const EdgeInsets.all(2.0),
+                child: const Text(
+                  'Special For You',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.right,
+                ),
+              ),
             ],
           ),
-        ),
-      ],
+          Components.customBlogCard(),
+          Components.customBlogCard(),
+          Components.customBlogCard(),
+        ],
+      ),
     );
   }
 }
