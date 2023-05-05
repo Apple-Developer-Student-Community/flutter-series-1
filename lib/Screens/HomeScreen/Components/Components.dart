@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Components {
   static AppBar buildAppBar() {
@@ -62,15 +63,15 @@ class Components {
     );
   }
 
-  static Container customEventCard() {
+  static Container customEventCard(String imgUrl, String headertxt, String basetxt, String eventdate) {
     return Container(
-      height: 260,
-      width: 220,
+      height: 230,
+      width: 180,
       margin: const EdgeInsets.all(8.0),
       padding: const EdgeInsets.all(5.0),
       decoration: BoxDecoration(
           border: Border.all(width: 1),
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(20),
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -84,29 +85,34 @@ class Components {
           ]),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: Image.asset('assets/images/applelogo.webp',
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(imgUrl,
                   fit: BoxFit.contain),
             ),
           ),
-          const Text(
-            'Bienvenue Apple',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Colors.white,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal:16.0),
+            child: Text(
+              headertxt,
+              style: GoogleFonts.laila(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.white,
+              ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 3.0, horizontal: 20.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 16.0),
             child: Text(
-              'Inaugral Event. It was a great fun!',
-              style: TextStyle(
+              basetxt,
+              style: const TextStyle(
                 overflow: TextOverflow.visible,
+                fontSize: 14,
                 color: Colors.grey,
               ),
             ),
@@ -114,13 +120,13 @@ class Components {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Text(
-                "May 5, 2023",
-                style: TextStyle(color: Colors.white),
+              Text(
+                eventdate,
+                style: const TextStyle(color: Colors.white),
               ),
               Container(
-                  height: 30,
-                  width: 30,
+                  height: 25,
+                  width: 25,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: Colors.orange,
@@ -128,6 +134,7 @@ class Components {
                   child: const Center(
                       child: Icon(
                     Icons.add,
+                    size: 20,
                     color: Colors.white,
                   )))
             ],
@@ -137,7 +144,7 @@ class Components {
     );
   }
 
-  static Container customBlogCard() {
+  static Container customBlogCard(String imgUrl, String headertxt, String basetxt) {
     return Container(
       height: 150,
       margin: const EdgeInsets.all(8.0),
@@ -163,7 +170,7 @@ class Components {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(25),
               child: Image.asset(
-                'assets/icons/communityLogo-modified.png',
+                imgUrl,
                 height: 120,
                 width: 120,
               ),
@@ -174,36 +181,36 @@ class Components {
               padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
-                    'Apple Developer Student Community!',
+                    headertxt,
                     overflow: TextOverflow.visible,
                     softWrap: true,
-                    style: TextStyle(
+                    style: GoogleFonts.laila(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 5.0),
+                    padding: const EdgeInsets.only(top: 3.0),
                     child: Text(
-                      'About Community!',
+                      basetxt,
                       textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: Colors.white,
+                      style: GoogleFonts.laila(
+                        color: Colors.grey,
                         fontSize: 16,
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Text(
-                    'Read more...',
-                    style: TextStyle(
+                    "Read more...",
+                    style: GoogleFonts.laila(
                         color: Colors.orange,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold),
                   )
                 ],

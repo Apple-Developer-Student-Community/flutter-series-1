@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'Components.dart';
 
 class Body extends StatefulWidget {
@@ -29,17 +29,17 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
       scrollDirection: Axis.vertical,
       child: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(10.0),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
             child: Text(
               'This Is The Finest Community In Your Surrounding!',
               overflow: TextOverflow.visible,
               softWrap: true,
-              style: TextStyle(
+              style: GoogleFonts.laila(
                 color: Colors.white,
                 fontSize: 27,
                 fontWeight: FontWeight.bold,
-              ),
+              )
             ),
           ),
           Components.buildCustomSearchBar(widget._controller),
@@ -49,7 +49,7 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
               labelColor: Colors.orange,
               labelStyle: const TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 15,
+                fontSize: 16,
               ),
               unselectedLabelColor: Colors.grey,
               indicator: const BoxDecoration(
@@ -65,11 +65,11 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                Components.customEventCard(),
-                Components.customEventCard(),
-                Components.customEventCard(),
-                Components.customEventCard(),
-                Components.customEventCard(),
+                //method: customEventCard(imgUrl: " ", headertxt: "", basetxt: "", date: "")
+                Components.customEventCard("assets/images/applelogo.webp", "Bienvenue Apple","Inaugral Event. It was a great fun", "Jan 1, 2023"),
+                Components.customEventCard("assets/images/apple.webp", "Workshop", "To make everyone familiar with terminal.", "Apill 8, 2023"),
+                Components.customEventCard("assets/images/applehome.jpg", "Reimagine", "Design Event. Design the Future", "May 1, 2023"),
+                Components.customEventCard("assets/images/logoanimated.jpg", "Evolve", "Introduction to Apple Silicon","May 5, 2023"),
               ],
             ),
           ),
@@ -90,9 +90,10 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
               ),
             ],
           ),
-          Components.customBlogCard(),
-          Components.customBlogCard(),
-          Components.customBlogCard(),
+          //method: customBlogCard(imgUrl: " ", headertxt: "", basetxt: "")
+          Components.customBlogCard("assets/icons/communityLogo.png", "Apple Developer Student Community", "About Community"),
+          Components.customBlogCard("assets/images/sikand.png", "Founding Members & Their Stories", "About The Founders"),
+          Components.customBlogCard("assets/images/sikand.png", "Building The Tech for Tomorrow", "Techstacks of Future"),
         ],
       ),
     );

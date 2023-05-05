@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         // '/notification': (context) => const NotificationScreen(),
       },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
