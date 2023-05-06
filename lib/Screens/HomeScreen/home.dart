@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'Components/Components.dart';
+import 'Components/components.dart';
 import 'Components/body.dart';
 
 class MyHomeScreen extends StatefulWidget {
@@ -17,11 +17,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: Components.buildAppBar(),
-
       body: Body(controller: _controller),
     );
   }
-
-  
 }
-

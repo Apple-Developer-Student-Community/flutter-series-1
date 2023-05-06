@@ -1,6 +1,7 @@
+import 'package:community_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'Components.dart';
+import 'components.dart';
 
 class Body extends StatefulWidget {
   const Body({
@@ -31,22 +32,19 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Text(
-              'This Is The Finest Community In Your Surrounding!',
-              overflow: TextOverflow.visible,
-              softWrap: true,
-              style: GoogleFonts.laila(
-                color: Colors.white,
-                fontSize: 27,
-                fontWeight: FontWeight.bold,
-              )
-            ),
+            child: Text('This Is The Finest Community In Your Surrounding!',
+                overflow: TextOverflow.visible,
+                softWrap: true,
+                style: GoogleFonts.laila(
+                  fontSize: 27,
+                  fontWeight: FontWeight.bold,
+                )),
           ),
           Components.buildCustomSearchBar(widget._controller),
           TabBar(
               isScrollable: true,
               padding: const EdgeInsets.all(8.0),
-              labelColor: Colors.orange,
+              labelColor: kSecondaryColor,
               labelStyle: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
@@ -57,19 +55,32 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
               ),
               controller: _tabController,
               tabs: const [
-                Text('All Events'),
-                Text('Ongoing Events'),
-                Text('Upcoming Events'),
+                Tab(text: 'All Events'),
+                Tab(text: 'Ongoing Events'),
+                Tab(text: 'Upcoming Events'),
               ]),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
                 //method: customEventCard(imgUrl: " ", headertxt: "", basetxt: "", date: "")
-                Components.customEventCard("assets/images/applelogo.webp", "Bienvenue Apple","Inaugral Event. It was a great fun", "Jan 1, 2023"),
-                Components.customEventCard("assets/images/apple.webp", "Workshop", "To make everyone familiar with terminal.", "Apill 8, 2023"),
-                Components.customEventCard("assets/images/applehome.jpg", "Reimagine", "Design Event. Design the Future", "May 1, 2023"),
-                Components.customEventCard("assets/images/logoanimated.jpg", "Evolve", "Introduction to Apple Silicon","May 5, 2023"),
+                Components.customEventCard(
+                    "assets/images/applelogo.webp",
+                    "Bienvenue Apple",
+                    "Inaugral Event. It was a great fun",
+                    "Jan 1, 2023"),
+                Components.customEventCard(
+                    "assets/images/apple.webp",
+                    "Workshop",
+                    "To make everyone familiar with terminal.",
+                    "Apill 8, 2023"),
+                Components.customEventCard(
+                    "assets/images/applehome.jpg",
+                    "Reimagine",
+                    "Design Event. Design the Future",
+                    "May 1, 2023"),
+                Components.customEventCard("assets/images/logoanimated.jpg",
+                    "Evolve", "Introduction to Apple Silicon", "May 5, 2023"),
               ],
             ),
           ),
@@ -83,7 +94,6 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
                   ),
                   textAlign: TextAlign.right,
                 ),
@@ -91,9 +101,12 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
             ],
           ),
           //method: customBlogCard(imgUrl: " ", headertxt: "", basetxt: "")
-          Components.customBlogCard("assets/icons/communityLogo.png", "Apple Developer Student Community", "About Community"),
-          Components.customBlogCard("assets/images/sikand.png", "Founding Members & Their Stories", "About The Founders"),
-          Components.customBlogCard("assets/images/sikand.png", "Building The Tech for Tomorrow", "Techstacks of Future"),
+          Components.customBlogCard("assets/icons/communityLogo.png",
+              "Apple Developer Student Community", "About Community"),
+          Components.customBlogCard("assets/images/sikand.png",
+              "Founding Members & Their Stories", "About The Founders"),
+          Components.customBlogCard("assets/images/sikand.png",
+              "Building The Tech for Tomorrow", "Techstacks of Future"),
         ],
       ),
     );

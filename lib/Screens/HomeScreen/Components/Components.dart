@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../utils/constants.dart';
 
 class Components {
   static AppBar buildAppBar() {
@@ -8,7 +9,7 @@ class Components {
         margin: const EdgeInsets.all(4),
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 43, 40, 40),
+          color: kButtonBg,
           borderRadius: BorderRadius.circular(15),
         ),
         child: IconButton(
@@ -23,7 +24,7 @@ class Components {
           margin: const EdgeInsets.all(2),
           padding: const EdgeInsets.all(2),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 43, 40, 40),
+            color: kButtonBg,
             borderRadius: BorderRadius.circular(50),
           ),
           child: IconButton(
@@ -34,7 +35,7 @@ class Components {
           ),
         ),
       ],
-      backgroundColor: Colors.black,
+      backgroundColor: kPrimaryColor,
     );
   }
 
@@ -45,25 +46,25 @@ class Components {
           controller: controller,
           decoration: InputDecoration(
             filled: true,
-            fillColor: Colors.white10,
+            fillColor: kButtonBg,
             prefixIcon: const Icon(
               Icons.fmd_good,
-              color: Colors.orange,
+              color: kSecondaryColor,
             ),
             enabledBorder: UnderlineInputBorder(
-              borderSide: const BorderSide(color: Colors.white10),
               borderRadius: BorderRadius.circular(50.0),
             ),
             hintText: 'Find Your Interest...',
-            hintStyle: const TextStyle(color: Colors.grey),
+            hintStyle: const TextStyle(color: kTertiaryColor),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50.0),
-                borderSide: const BorderSide(color: Colors.orange)),
+                borderSide: const BorderSide(color: kSecondaryColor)),
           )),
     );
   }
 
-  static Container customEventCard(String imgUrl, String headertxt, String basetxt, String eventdate) {
+  static Container customEventCard(
+      String imgUrl, String headertxt, String basetxt, String eventdate) {
     return Container(
       height: 230,
       width: 180,
@@ -91,29 +92,28 @@ class Components {
             padding: const EdgeInsets.all(8.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image.asset(imgUrl,
-                  fit: BoxFit.contain),
+              child: Image.asset(imgUrl, fit: BoxFit.contain),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal:16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
               headertxt,
               style: GoogleFonts.laila(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
-                color: Colors.white,
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 16.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 3.0, horizontal: 16.0),
             child: Text(
               basetxt,
               style: const TextStyle(
                 overflow: TextOverflow.visible,
                 fontSize: 14,
-                color: Colors.grey,
+                color: kTertiaryColor,
               ),
             ),
           ),
@@ -122,20 +122,18 @@ class Components {
             children: [
               Text(
                 eventdate,
-                style: const TextStyle(color: Colors.white),
               ),
               Container(
                   height: 25,
                   width: 25,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.orange,
+                    color: kSecondaryColor,
                   ),
                   child: const Center(
                       child: Icon(
                     Icons.add,
                     size: 20,
-                    color: Colors.white,
                   )))
             ],
           )
@@ -144,7 +142,8 @@ class Components {
     );
   }
 
-  static Container customBlogCard(String imgUrl, String headertxt, String basetxt) {
+  static Container customBlogCard(
+      String imgUrl, String headertxt, String basetxt) {
     return Container(
       height: 150,
       margin: const EdgeInsets.all(8.0),
@@ -187,7 +186,6 @@ class Components {
                     overflow: TextOverflow.visible,
                     softWrap: true,
                     style: GoogleFonts.laila(
-                      color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
@@ -198,7 +196,7 @@ class Components {
                       basetxt,
                       textAlign: TextAlign.left,
                       style: GoogleFonts.laila(
-                        color: Colors.grey,
+                        color: kTertiaryColor,
                         fontSize: 16,
                       ),
                     ),
@@ -209,7 +207,7 @@ class Components {
                   Text(
                     "Read more...",
                     style: GoogleFonts.laila(
-                        color: Colors.orange,
+                        color: kSecondaryColor,
                         fontSize: 14,
                         fontWeight: FontWeight.bold),
                   )
