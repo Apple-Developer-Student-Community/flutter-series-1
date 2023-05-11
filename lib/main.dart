@@ -4,6 +4,7 @@ import 'package:community_app/Screens/LoginScreen/login.dart';
 
 import 'package:flutter/material.dart';
 
+import 'Components/bottom_navigation_bar.dart';
 import 'Screens/SplashScreen/splash.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(),
       initialRoute: '/splash',
       routes: {
-        '/home': (context) => const MyHomeScreen(),
+        '/home': (context) => const MyBottomNavBar(),
         '/splash': (context) => const SplashScreen(),
         '/feed': (context) => const FeedScreen(),
         '/login': (context) => const LoginScreen(),
