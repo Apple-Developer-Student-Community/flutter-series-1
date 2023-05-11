@@ -73,11 +73,7 @@ class Components {
       decoration: BoxDecoration(
           border: Border.all(width: 1),
           borderRadius: BorderRadius.circular(20),
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color.fromARGB(255, 42, 41, 41), Colors.black],
-          ),
+          gradient: customCardGradient,
           boxShadow: const [
             BoxShadow(
               blurRadius: 25,
@@ -151,11 +147,7 @@ class Components {
       decoration: BoxDecoration(
           border: Border.all(width: 1),
           borderRadius: BorderRadius.circular(25),
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color.fromARGB(255, 42, 41, 41), Colors.black],
-          ),
+          gradient: customCardGradient,
           boxShadow: const [
             BoxShadow(
               blurRadius: 25,
