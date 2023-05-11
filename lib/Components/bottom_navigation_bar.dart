@@ -1,5 +1,6 @@
 
 import 'package:community_app/Screens/HomeScreen/home.dart';
+import 'package:community_app/Screens/NotificationScreen/notification.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,7 +19,8 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
   final Screens = [
     Center(child: const Text("feed")),
     const MyHomeScreen(),
-    Center(child: const Text("notification")),
+    const NoticationScreen(),
+    
   ];
   @override
   Widget build(BuildContext context) {
