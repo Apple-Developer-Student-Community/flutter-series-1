@@ -1,4 +1,5 @@
 import 'package:community_app/Screens/FeedScreen/feed.dart';
+import 'package:community_app/Screens/NotificationScreen/notification.dart';
 import 'package:community_app/Screens/HomeScreen/home.dart';
 import 'package:community_app/Screens/LoginScreen/login.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         '/splash': (context) => const SplashScreen(),
         '/feed': (context) => const FeedScreen(),
         '/login': (context) => const LoginScreen(),
-        // '/notification': (context) => const NotificationScreen(),
+        //'/notification': (context) => const NotificationScreen(),
       },
       debugShowCheckedModeBanner: false,
     );

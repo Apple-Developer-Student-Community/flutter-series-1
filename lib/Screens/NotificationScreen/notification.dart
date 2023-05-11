@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class noticationscreen extends StatefulWidget {
-  const noticationscreen({super.key});
+class NoticationScreen extends StatefulWidget {
+  const NoticationScreen({super.key});
 
   @override
-  State<noticationscreen> createState() => _noticationscreenState();
+  State<NoticationScreen> createState() => _NoticationScreenState();
 }
 
-class _noticationscreenState extends State<noticationscreen> {
+class _NoticationScreenState extends State<NoticationScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
