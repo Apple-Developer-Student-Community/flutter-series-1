@@ -16,10 +16,11 @@ class MyBottomNavBar extends StatefulWidget {
 
 class _MyBottomNavBarState extends State<MyBottomNavBar> {
   int index = 1;
+  // ignore: non_constant_identifier_names
   final Screens = [
-    Center(child: const Text("feed")),
+    const Center(child: Text("feed")),
     const MyHomeScreen(),
-    const NoticationScreen(),
+    const NotificationScreen(),
     
   ];
   @override
@@ -35,7 +36,7 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
     return CurvedNavigationBar(
       color: Colors.black,
       backgroundColor: Colors.orange,
-      items: <Widget>[
+      items: const <Widget> [
         Icon(Icons.home_filled, size: 30),
         Icon(Icons.list, size: 30),
         Icon(Icons.notifications, size: 30),
@@ -52,12 +53,12 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
       data: NavigationBarThemeData(
           indicatorColor: Colors.transparent,
           labelTextStyle: MaterialStateProperty.all(
-              TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.orange))),
+              const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.orange))),
       child: NavigationBar(
           height: 45,
           backgroundColor: Colors.black.withOpacity(1),
           labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-          animationDuration: Duration(seconds: 1),
+          animationDuration: const Duration(seconds: 1),
           selectedIndex: index,
           onDestinationSelected: (index) =>
               setState(() => this.index = index),
