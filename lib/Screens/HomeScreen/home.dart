@@ -1,3 +1,4 @@
+import 'package:community_app/Screens/HomeScreen/Components/drawer.dart';
 import 'package:flutter/material.dart';
 
 import 'Components/components.dart';
@@ -18,6 +19,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
       backgroundColor: Colors.black,
       appBar: Components.buildAppBar(),
       body: Body(controller: _controller),
+      drawer: MyDrawer()
     );
   }
 }
