@@ -58,7 +58,7 @@ class subjectTile extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(subName, style: kTextStyle),
+                Expanded(child: Text(subName, style: kTextStyle)),
                 Text(
                   percent + '%',
                   style: (double.tryParse(percent)! >= 75)
