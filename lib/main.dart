@@ -2,6 +2,7 @@ import 'package:community_app/Screens/FeedScreen/feed.dart';
 import 'package:community_app/Screens/NotificationScreen/notification.dart';
 import 'package:community_app/Screens/HomeScreen/home.dart';
 import 'package:community_app/Screens/LoginScreen/login.dart';
+import 'package:community_app/Screens/Timetable/timetable_home.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         '/splash': (context) => const SplashScreen(),
         '/feed': (context) => const FeedScreen(),
         '/login': (context) => const LoginScreen(),
+        '/timetable': (context) => const TimetableHome(),
         //'/notification': (context) => const NotificationScreen(),
       },
       debugShowCheckedModeBanner: false,

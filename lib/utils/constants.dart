@@ -45,6 +45,17 @@ TextStyle kDetailPageTextStyle = GoogleFonts.poppins(
     fontWeight: FontWeight.w500
 );
 
+TextStyle kSubjectTextStyle = GoogleFonts.poppins(
+    color: kSubTextcolor,
+    fontSize: 24,
+    fontWeight: FontWeight.w600
+);
+
+TextStyle kClassTextStyle = GoogleFonts.poppins(
+    color: kSubTextcolor,
+    fontWeight: FontWeight.w400
+);
+
 
 
 //--------------------G R A D I E N T S--------------------
@@ -53,6 +64,12 @@ const Gradient kOrangeGradient = LinearGradient(
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
     colors: [Color(0xffFF6600), Color(0xffff983f)]);
+
+const Gradient kGreyGradient = LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    colors: [Color(0xff1D1F21), Color(0xff1D1F21)]);
+
 
 
 const LinearGradient customCardGradient = LinearGradient(

@@ -1,4 +1,5 @@
 import 'package:community_app/Screens/Attendance/home_page.dart';
+import 'package:community_app/Screens/Timetable/timetable_home.dart';
 import 'package:community_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -83,6 +84,12 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
 
               ListTile(
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TimetableHome()));
+                }
+                ,
 
                 title: Text('TimeTable'),
 

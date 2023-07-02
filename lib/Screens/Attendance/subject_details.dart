@@ -58,7 +58,7 @@ class SubjectDetail extends StatelessWidget {
         title: Text(subjectName),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(5.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -74,7 +74,7 @@ class SubjectDetail extends StatelessWidget {
                     children: [
                       Container(
                           height: 150,
-                          width: 175,
+                          width: MediaQuery.of(context).size.width*0.5-20,
                           decoration: BoxDecoration(
                             gradient: kOrangeGradient,
                             borderRadius: BorderRadius.circular(12),
@@ -89,10 +89,7 @@ class SubjectDetail extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(subjectName,
-                                      style: GoogleFonts.poppins(
-                                          color: kSubTextcolor,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w600)),
+                                      style: kSubjectTextStyle)
                                 ),
 
                                 FittedBox(
@@ -122,46 +119,53 @@ class SubjectDetail extends StatelessWidget {
                           ))
                     ],
                   ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Container(
-                    height: 400,
-                    width: 210,
-                    decoration: BoxDecoration(
-                      color: kContainercolor,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularPercentIndicator(
-                          animation: true,
-                          animationDuration: 1000,
-                          radius: 68,
-                          lineWidth: 17,
-                          center: Text(percentage+'%', style: kDetailPageTextStyle,),
-                          percent:
-                          ((double.tryParse(percentage)! - 0) / (100 - 0)) *
-                              (1 - 0) +
-                              0,
-                          circularStrokeCap: CircularStrokeCap.round,
-                          progressColor: (double.tryParse(percentage)! >= 75)
-                              ? Colors.green
-                              : Colors.red,
+                  // SizedBox(
+                  //   width: 15,
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Container(
+                      height: 400,
+                      width: MediaQuery.of(context).size.width*0.5-14,
+                      decoration: BoxDecoration(
+                        color: kContainercolor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 11.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          //crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CircularPercentIndicator(
+                              animation: true,
+                              animationDuration: 1000,
+                              radius: 68,
+                              lineWidth: 17,
+                              center: Text(percentage+'%', style: kDetailPageTextStyle,),
+                              percent:
+                              ((double.tryParse(percentage)! - 0) / (100 - 0)) *
+                                  (1 - 0) +
+                                  0,
+                              circularStrokeCap: CircularStrokeCap.round,
+                              progressColor: (double.tryParse(percentage)! >= 75)
+                                  ? Colors.green
+                                  : Colors.red,
 
+                            ),
+                            SizedBox(height: 40,),
+                            Text("Present:", style: kDetailPageTextStyle,),
+                            ButtonRow(num: present, //decreaseValue: decreaseValue
+                            ),
+                            SizedBox(height: 20,),
+                            Text("Total Classes:",style: kDetailPageTextStyle,),
+                            ButtonRow(num: classes, //decreaseValue: decreaseValue,
+                            )
+
+
+                          ],
                         ),
-                        SizedBox(height: 40,),
-                        Text("Present:", style: kDetailPageTextStyle,),
-                        ButtonRow(num: present, //decreaseValue: decreaseValue
-                        ),
-                        SizedBox(height: 20,),
-                        Text("Total Classes:",style: kDetailPageTextStyle,),
-                        ButtonRow(num: classes, //decreaseValue: decreaseValue,
-                        )
-
-
-                      ],
+                      ),
                     ),
                   ),
                 ],
@@ -170,7 +174,7 @@ class SubjectDetail extends StatelessWidget {
             SizedBox(height: 40,),
             Container(
                 height: 150,
-                width: double.infinity,
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: kContainercolor,
                   borderRadius: BorderRadius.circular(12),

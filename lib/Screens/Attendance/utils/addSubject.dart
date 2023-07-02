@@ -43,7 +43,7 @@ class AddSubject extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: SizedBox(
-                        width: 175,
+                        width: 100,
                         height: 34,
                         child: TextField(
                           controller: subcontroller,
@@ -53,6 +53,9 @@ class AddSubject extends StatelessWidget {
                               filled: true,
                               fillColor: Colors.white24,
                               hintText: "Eg. JAVA",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5),
                                   borderSide: BorderSide(color: kPrimarycolor)),
@@ -85,6 +88,9 @@ class AddSubject extends StatelessWidget {
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white24,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5),
                                 borderSide: BorderSide(color: kPrimarycolor),
@@ -119,6 +125,9 @@ class AddSubject extends StatelessWidget {
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white24,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5),
                                 borderSide: BorderSide(color: kPrimarycolor),
@@ -153,6 +162,9 @@ class AddSubject extends StatelessWidget {
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white24,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5),
                                 borderSide: BorderSide(color: kPrimarycolor),

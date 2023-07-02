@@ -15,24 +15,22 @@ class ButtonRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          MaterialButton(
-            elevation: 0,
-            height: 42,
-            onPressed:(){},
-            shape: CircleBorder(),
-
-            color: Colors.grey,
-            child: Icon(CupertinoIcons.minus),
+          IconButton(
+            icon: Icon(CupertinoIcons.minus),
+            color: Colors.grey, onPressed: () {  },
           ),
+          SizedBox(width: 8),
           Text(num.toString(), style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-          MaterialButton(
-            elevation: 0,
-            height: 42,
+          SizedBox(width: 8),
+          IconButton(
+            icon: Icon(CupertinoIcons.add),
+
             onPressed: (){},
-            shape: CircleBorder(),
+
             color: kPrimarycolor,
-            child: Icon(CupertinoIcons.add),
+
           )
 
         ],
