@@ -55,10 +55,6 @@ class _subjectTileState extends State<subjectTile> {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) =>
                     SubjectDetail(
-                      // subjectName: widget.subName,
-                      // percentage: widget.percent,
-                      // present: widget.presents ,
-                      // classes: widget.classses,
                       minpercent: widget.minpercent,
                       decreaseClassesValue:widget.decreaseClassesValue,
                       decreasePresentValue: widget.decreasePresentValue,
@@ -72,8 +68,8 @@ class _subjectTileState extends State<subjectTile> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(child: Text(widget.subName, style: kTextStyle)),
-                Text(
-                  (widget.percent) + '%',
+                Text( (widget.presents == 0 && widget.classses == 0)? "0%"
+                  :(widget.percent) + '%',
                   style: (double.tryParse(widget.percent)! >= 75)
                       ? TextStyle(color: Colors.green, fontSize: 20)
                       : TextStyle(color: Colors.red, fontSize: 20),
