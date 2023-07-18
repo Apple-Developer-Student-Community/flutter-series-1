@@ -12,7 +12,7 @@ const Color kContainercolor = Color(0xff444648);
 const Color kTextcolor = Color(0xffFFFFFF);
 const Color kSubTextcolor = Color(0xffffffa1);
 const Color kDrawercolor = Color(0xff1D1F21);
-
+const Color kHintTextcolor = Color(0xff7F8487);
 const Color kPrimaryColor = Colors.black;
 const Color kSecondaryColor = Colors.orange;
 const Color kTertiaryColor = Colors.grey;

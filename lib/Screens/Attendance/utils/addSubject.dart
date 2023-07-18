@@ -12,16 +12,22 @@ class AddSubject extends StatelessWidget {
   VoidCallback onSave;
   VoidCallback onCancel;
 
-
-  AddSubject({Key? key,
+  AddSubject({
+    Key? key,
     required this.subcontroller,
     required this.presentcontroller,
     required this.classcontroller,
     required this.mincontroller,
     required this.onSave,
     required this.onCancel,
-
   }) : super(key: key);
+
+  bool areControllersEmpty() {
+    return subcontroller.text.isEmpty ||
+        presentcontroller.text.isEmpty ||
+        classcontroller.text.isEmpty ||
+        mincontroller.text.isEmpty;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +44,8 @@ class AddSubject extends StatelessWidget {
               child: Container(
                 child: Row(
                   children: [
-                    Text(
-                        "Subject Name:", style: TextStyle(color: Colors.white)),
+                    Text("Subject Name:",
+                        style: TextStyle(color: Colors.white)),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: SizedBox(
@@ -53,6 +59,7 @@ class AddSubject extends StatelessWidget {
                               filled: true,
                               fillColor: Colors.white24,
                               hintText: "Eg. JAVA",
+                              hintStyle: TextStyle(color: kHintTextcolor),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5),
                               ),
@@ -96,6 +103,7 @@ class AddSubject extends StatelessWidget {
                                 borderSide: BorderSide(color: kPrimarycolor),
                               ),
                               hintText: "0",
+                              hintStyle: TextStyle(color: kHintTextcolor),
                               isDense: true,
                               contentPadding: EdgeInsets.all(8)),
                         ),
@@ -133,6 +141,7 @@ class AddSubject extends StatelessWidget {
                                 borderSide: BorderSide(color: kPrimarycolor),
                               ),
                               hintText: "0",
+                              hintStyle: TextStyle(color: kHintTextcolor),
                               isDense: true,
                               contentPadding: EdgeInsets.all(8)),
                         ),
@@ -170,6 +179,7 @@ class AddSubject extends StatelessWidget {
                                 borderSide: BorderSide(color: kPrimarycolor),
                               ),
                               hintText: "75",
+                              hintStyle: TextStyle(color: kHintTextcolor),
                               isDense: true,
                               contentPadding: EdgeInsets.all(8)),
                         ),
@@ -182,15 +192,13 @@ class AddSubject extends StatelessWidget {
           ],
         ),
         actions: [
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                MyButton(text: 'Cancel', onPressed: onCancel),
-                SizedBox(width: 20,),
-                MyButton(text: 'Add', onPressed: onSave)
-              ]
-          )
-        ]
-    );
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            MyButton(text: 'Cancel', onPressed: onCancel),
+            SizedBox(
+              width: 20,
+            ),
+            MyButton(text: 'Add', onPressed: onSave)
+          ])
+        ]);
   }
 }

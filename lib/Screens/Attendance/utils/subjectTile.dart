@@ -4,14 +4,17 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../../utils/constants.dart';
 import '../subject_details.dart';
 
-class subjectTile extends StatelessWidget {
+class subjectTile extends StatefulWidget {
   final String subName;
   final String percent;
+  final int index;
   int? presents;
   int? classses;
   int? minpercent;
-  //VoidCallback decreaseValue;
-  //final double percent2;
+  Function() decreasePresentValue;
+  Function() decreaseClassesValue;
+  Function() increasePresentValue;
+  Function() increaseClassesValue;
 
   Function(BuildContext)? deleteFunction;
   subjectTile({
@@ -22,19 +25,26 @@ class subjectTile extends StatelessWidget {
     required this.minpercent,
     required this.presents,
     required this.classses,
-    // required this.decreaseValue
-    //required this.percent2,
+    required this.decreasePresentValue,
+    required this.decreaseClassesValue,
+    required this.increasePresentValue,
+    required this.increaseClassesValue, required this.index
   }) : super(key: key);
 
   @override
+  State<subjectTile> createState() => _subjectTileState();
+}
+
+class _subjectTileState extends State<subjectTile> {
+  @override
   Widget build(BuildContext context) {
-    print("percentage= "+percent );
+    print("percentage= "+widget.percent );
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 24.0),
       child: Slidable(
         endActionPane: ActionPane(motion: StretchMotion(), children: [
           SlidableAction(
-            onPressed: deleteFunction,
+            onPressed: widget.deleteFunction,
             icon: Icons.delete,
             backgroundColor: Colors.red,
             borderRadius: BorderRadius.circular(12),
@@ -45,12 +55,15 @@ class subjectTile extends StatelessWidget {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) =>
                     SubjectDetail(
-                      subjectName: subName,
-                      percentage: percent,
-                      present: presents ,
-                      classes: classses,
-                      minpercent: minpercent,
-                      // decreaseValue:decreaseValue,
+                      // subjectName: widget.subName,
+                      // percentage: widget.percent,
+                      // present: widget.presents ,
+                      // classes: widget.classses,
+                      minpercent: widget.minpercent,
+                      decreaseClassesValue:widget.decreaseClassesValue,
+                      decreasePresentValue: widget.decreasePresentValue,
+                      increasePresentValue: widget.increasePresentValue,
+                      increaseClassesValue: widget.increaseClassesValue, subjectIndex: widget.index,
                     )));
           },
           child: Container(
@@ -58,10 +71,10 @@ class subjectTile extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(child: Text(subName, style: kTextStyle)),
+                Expanded(child: Text(widget.subName, style: kTextStyle)),
                 Text(
-                  percent + '%',
-                  style: (double.tryParse(percent)! >= 75)
+                  (widget.percent) + '%',
+                  style: (double.tryParse(widget.percent)! >= 75)
                       ? TextStyle(color: Colors.green, fontSize: 20)
                       : TextStyle(color: Colors.red, fontSize: 20),
                 ),

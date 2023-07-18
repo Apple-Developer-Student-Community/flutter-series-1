@@ -1,45 +1,97 @@
-import 'package:community_app/Screens/Attendance/utils/button_row.dart';
+import 'package:community_app/Screens/Attendance/utils/button_rowPresent.dart';
+import 'package:community_app/Screens/Attendance/utils/button_rowClasses.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../../utils/constants.dart';
 import 'home_page.dart' as home;
 
-class SubjectDetail extends StatelessWidget {
-  final String subjectName;
-  final String percentage;
-  var present;
-  var classes;
+class SubjectDetail extends StatefulWidget {
+  final int subjectIndex;
   var minpercent;
-  //VoidCallback decreaseValue;
-
+  Function() decreasePresentValue;
+  Function() decreaseClassesValue;
+  Function() increasePresentValue;
+  Function() increaseClassesValue;
 
   SubjectDetail(
       {Key? key,
-        required this.subjectName,
-        required this.percentage,
-        required this.present,
-        required this.classes,
-        required this.minpercent,
-        //required this.decreaseValue
-      })
+      required this.minpercent,
+      required this.decreasePresentValue,
+      required this.decreaseClassesValue,
+      required this.increasePresentValue,
+      required this.increaseClassesValue,
+      required this.subjectIndex})
       : super(key: key);
+
+  @override
+  State<SubjectDetail> createState() => _SubjectDetailState();
+}
+
+class _SubjectDetailState extends State<SubjectDetail> {
+  late String subjectName;
+  late String percentage;
+  late int present;
+  late int classes;
+  late int minpercent;
+
+  @override
+  void initState() {
+    super.initState();
+    loadSubjectDetails();
+  }
+
+  void loadSubjectDetails() {
+    // Fetch subject details from the database using the subjectIndex
+    subjectName = home.HomePage.db.subList[widget.subjectIndex][0];
+    percentage = home.HomePage.db.subList[widget.subjectIndex][1];
+    present = int.parse(home.HomePage.db.subList[widget.subjectIndex][2]);
+    classes = int.parse(home.HomePage.db.subList[widget.subjectIndex][3]);
+    minpercent = int.parse(home.HomePage.db.subList[widget.subjectIndex][4]);
+  }
+
+  // @override
+  // void didUpdateWidget(SubjectDetail oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   if (widget.subjectIndex != oldWidget.subjectIndex) {
+  //     loadSubjectDetails();
+  //   }
+  // }
+
+  double realtimePercentage(int present, int classes) {
+    double _percent;
+
+    if (classes == 0 || present == 0 || classes<present) {
+      return 0.0;
+    }
+
+    _percent = ((present / classes) * 100);
+
+    return _percent;
+  }
 
   int maintainAtt(int classes, int present, int minpercent) {
     int att = 0;
-    while(true){
-      if(((present+att)*100)/(classes+att) >= minpercent){
+    while (true) {
+      if (((present + att) * 100) / (classes + att) >= minpercent) {
         return att;
       }
       att++;
     }
   }
+
   int maintainBunk(int classes, int present, int minpercent) {
     int bunk = 0;
     int miss = classes - present;
-    while(true){
-      if(((present/(present+miss))*100 <= minpercent)){
-        return bunk-1;
+    while (true) {
+
+      if (((present / (present + miss)) * 100 <= minpercent)) {
+        int x = bunk - 1;
+        if (x < 0) {
+          return bunk;
+        } else {
+          return x;
+        }
       }
       miss++;
       bunk++;
@@ -47,9 +99,9 @@ class SubjectDetail extends StatelessWidget {
   }
 
 
-
   @override
   Widget build(BuildContext context) {
+    print('classes=====' + classes.toString());
     return Scaffold(
       backgroundColor: kBgcolor,
       appBar: AppBar(
@@ -74,7 +126,7 @@ class SubjectDetail extends StatelessWidget {
                     children: [
                       Container(
                           height: 150,
-                          width: MediaQuery.of(context).size.width*0.5-20,
+                          width: MediaQuery.of(context).size.width * 0.5 - 20,
                           decoration: BoxDecoration(
                             gradient: kOrangeGradient,
                             borderRadius: BorderRadius.circular(12),
@@ -88,35 +140,38 @@ class SubjectDetail extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
-                                  child: Text(subjectName,
-                                      style: kSubjectTextStyle)
-                                ),
-
+                                    child: Text(subjectName,
+                                        style: kSubjectTextStyle)),
                                 FittedBox(
-                                  child: Text(percentage + '%',
+                                  child: Text(
+                                      realtimePercentage(present, classes)
+                                              .toStringAsFixed(2) +
+                                          '%',
                                       style: GoogleFonts.poppins(
                                           color: Colors.black, fontSize: 35)),
                                 ),
                               ],
                             ),
                           )),
-                      SizedBox(height: 50,),
+                      SizedBox(
+                        height: 50,
+                      ),
                       Container(
                           width: 175,
                           //color: Colors.red,
-                          child: RichText(text: TextSpan(
-                              text: "Percentage Required: ", style: kTextStyle,
-                              children: <TextSpan>[
-                                TextSpan(text: minpercent.toString()+'%', style:  GoogleFonts.poppins(
-                                    fontSize: 26,
-                                    color: kTextcolor,
-                                    fontWeight: FontWeight.w700
-
+                          child: RichText(
+                              text: TextSpan(
+                                  text: "Percentage Required: ",
+                                  style: kTextStyle,
+                                  children: <TextSpan>[
+                                TextSpan(
+                                  text: widget.minpercent.toString() + '%',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 26,
+                                      color: kTextcolor,
+                                      fontWeight: FontWeight.w700),
                                 ),
-                                ),
-                              ]
-                          )
-                          ))
+                              ])))
                     ],
                   ),
                   // SizedBox(
@@ -126,7 +181,7 @@ class SubjectDetail extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     child: Container(
                       height: 400,
-                      width: MediaQuery.of(context).size.width*0.5-14,
+                      width: MediaQuery.of(context).size.width * 0.5 - 14,
                       decoration: BoxDecoration(
                         color: kContainercolor,
                         borderRadius: BorderRadius.circular(12),
@@ -142,27 +197,57 @@ class SubjectDetail extends StatelessWidget {
                               animationDuration: 1000,
                               radius: 68,
                               lineWidth: 17,
-                              center: Text(percentage+'%', style: kDetailPageTextStyle,),
+                              center: Text(
+                                realtimePercentage(present, classes)
+                                        .toStringAsFixed(2) +
+                                    '%',
+                                style: kDetailPageTextStyle,
+                              ),
                               percent:
-                              ((double.tryParse(percentage)! - 0) / (100 - 0)) *
-                                  (1 - 0) +
-                                  0,
+                                  ((realtimePercentage(present, classes) - 0) /
+                                              (100 - 0)) *
+                                          (1 - 0) +
+                                      0,
                               circularStrokeCap: CircularStrokeCap.round,
-                              progressColor: (double.tryParse(percentage)! >= 75)
-                                  ? Colors.green
-                                  : Colors.red,
-
+                              progressColor:
+                                  (realtimePercentage(present, classes) >= 75)
+                                      ? Colors.green
+                                      : Colors.red,
                             ),
-                            SizedBox(height: 40,),
-                            Text("Present:", style: kDetailPageTextStyle,),
-                            ButtonRow(num: present, //decreaseValue: decreaseValue
+                            SizedBox(
+                              height: 40,
                             ),
-                            SizedBox(height: 20,),
-                            Text("Total Classes:",style: kDetailPageTextStyle,),
-                            ButtonRow(num: classes, //decreaseValue: decreaseValue,
+                            Text(
+                              "Present:",
+                              style: kDetailPageTextStyle,
+                            ),
+                            ButtonRowPresent(
+                              num: present,
+                              decreaseValue: widget.decreasePresentValue,
+                              increaseValue: widget.increasePresentValue,
+                              onValueChanged: (int value) {
+                                setState(() {
+                                  present = value;
+                                });
+                              }, compare_num: classes,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              "Total Classes:",
+                              style: kDetailPageTextStyle,
+                            ),
+                            ButtonRowClasses(
+                              num: classes,
+                              decreaseValue: widget.decreaseClassesValue,
+                              increaseValue: widget.increaseClassesValue,
+                              onValueChanged: (int value) {
+                                setState(() {
+                                  classes = value;
+                                });
+                              }, compare_num: present,
                             )
-
-
                           ],
                         ),
                       ),
@@ -171,7 +256,9 @@ class SubjectDetail extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 40,),
+            SizedBox(
+              height: 40,
+            ),
             Container(
                 height: 150,
                 width: MediaQuery.of(context).size.width,
@@ -179,37 +266,40 @@ class SubjectDetail extends StatelessWidget {
                   color: kContainercolor,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: (double.tryParse(percentage)! <= 75)
+                child: (realtimePercentage(present, classes) >= 75)
                     ? Center(
-                  child: RichText(text: TextSpan(
-                    text:"Lectures you need to Attend: ",
-                    style: kText2Style,
-                    children: <TextSpan>[
-                      TextSpan(text: maintainAtt(classes, present, minpercent).toString(),
-                        style:kText3Style,
-                      ),
+                        child: RichText(
+                            text: TextSpan(
+                                text: "Lectures you can Bunk: ",
+                                style: kTextStyle,
+                                children: <TextSpan>[
+                            TextSpan(
+                                text: maintainBunk(
+                                        classes, present, widget.minpercent)
+                                    .toString(),
+                                style: kText3Style),
+                          ])))
 
-                    ],
-                  ),
-                  ),
-                )
-                //textAlign: TextAlign.center,
+                    //textAlign: TextAlign.center,
 
-
-                    :Center(
-                  child: RichText(text: TextSpan(
-                      text: "Lectures you can Bunk: ", style: kTextStyle,
-                      children: <TextSpan>[
-                        TextSpan(text: maintainBunk(classes, present, minpercent).toString(),
-                            style:  kText3Style
+                    : Center(
+                        child: RichText(
+                          text: TextSpan(
+                            text: "Lectures you need to Attend: ",
+                            style: kText2Style,
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: maintainAtt(
+                                        classes, present, widget.minpercent)
+                                    .toString(),
+                                style: kText3Style,
+                              ),
+                            ],
+                          ),
                         ),
-                      ]
-                  )
-                  ),
-                ))
+                      ))
           ],
         ),
-
       ),
     );
   }
