@@ -1,5 +1,5 @@
-import 'package:community_app/Screens/Timetable/Groups/group1/tabbar_view1.dart';
-import 'package:community_app/Screens/Timetable/Groups/group2/tabbar_view2.dart';
+import 'package:community_app/Screens/Timetable/Groups/group1/tabbar_view.dart';
+import 'package:community_app/Screens/Timetable/utils/dropDown_button.dart';
 import 'package:community_app/Screens/Timetable/utils/tab_bar.dart';
 import 'package:community_app/Screens/Timetable/utils/time_container.dart';
 import 'package:community_app/utils/constants.dart';
@@ -15,6 +15,8 @@ class TimetableHome extends StatefulWidget {
 }
 
 class _TimetableHomeState extends State<TimetableHome> {
+  int selectedGradeIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
@@ -38,20 +40,25 @@ class _TimetableHomeState extends State<TimetableHome> {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 25.0, top: 20),
-                child: Container(
-                  child: RichText(text: TextSpan(
-                      text: "GROUP", style: kTextStyle,
-                      children: <TextSpan>[
-                        TextSpan(text: " 1",
-                            style: kText3Style
-                        ),
-                      ]
-                  )
-                  ),
-                ),
-              ),
+              DropDownGroup(onGradeSelected: (index) {
+                setState(() {
+                  selectedGradeIndex = index;
+                });
+              },),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 25.0, top: 20),
+              //   child: Container(
+              //     child: RichText(text: TextSpan(
+              //         text: "GROUP", style: kTextStyle,
+              //         children: <TextSpan>[
+              //           TextSpan(text: " 1",
+              //               style: kText3Style
+              //           ),
+              //         ]
+              //     )
+              //     ),
+              //   ),
+              // ),
               SizedBox(height: 20,),
               Custom_TabBar(),
 
@@ -65,7 +72,7 @@ class _TimetableHomeState extends State<TimetableHome> {
                   ],
                 ),
               ),
-              CustomTabView1(),
+              CustomTabView(gradeIndex: selectedGradeIndex,),
 
 
             ],

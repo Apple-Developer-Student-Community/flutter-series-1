@@ -8,10 +8,10 @@ class SubjectContainer extends StatelessWidget {
 
   String subject;
   String classroom;
-  String teacher;
+  //String teacher;
   Gradient gradient;
 
-  SubjectContainer({Key? key, required this.subject, required this.classroom, required this.teacher, required this.gradient}) : super(key: key);
+  SubjectContainer({Key? key, required this.subject, required this.classroom,  required this.gradient}) : super(key: key);
 
 
   @override
@@ -36,31 +36,32 @@ class SubjectContainer extends StatelessWidget {
 
 
           child: Padding(
-            padding: const EdgeInsets.only(left: 12.0, top: 10.0),
+            padding: const EdgeInsets.only(left: 12.0, top: 12.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(subject, style: kSubjectTextStyle,),
                 Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
+                  padding: const EdgeInsets.only(top: 24.0),
                   child: Row(
                     children: [
+                      SizedBox(width: 6),
                       FaIcon(FontAwesomeIcons.solidBuilding, color: kSubTextcolor, size: 20,),
                       SizedBox(width: 8,),
                       Text(classroom, style: kClassTextStyle)
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Row(
-                    children: [
-                      FaIcon(FontAwesomeIcons.solidUser, color: kSubTextcolor, size: 20,),
-                      SizedBox(width: 8,),
-                      Text(teacher, style: kClassTextStyle)
-                    ],
-                  ),
-                )
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 8.0),
+                //   child: Row(
+                //     children: [
+                //       FaIcon(FontAwesomeIcons.solidUser, color: kSubTextcolor, size: 20,),
+                //       SizedBox(width: 8,),
+                //       Text(teacher, style: kClassTextStyle)
+                //     ],
+                //   ),
+                // )
               ],
             ),
           ),
