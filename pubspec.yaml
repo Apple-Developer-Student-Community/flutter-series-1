@@ -46,6 +46,7 @@ dependencies:
   percent_indicator: ^4.2.3
   timer_builder: ^2.0.0
   lottie: ^2.0.0
+  shared_preferences: ^2.2.1
 
 
 dev_dependencies:

@@ -61,7 +61,7 @@ class _SubjectDetailState extends State<SubjectDetail> {
   double realtimePercentage(int present, int classes) {
     double _percent;
 
-    if (classes == 0 || present == 0 || classes<present) {
+    if (classes == 0 || present == 0 || classes < present) {
       return 0.0;
     }
 
@@ -84,7 +84,6 @@ class _SubjectDetailState extends State<SubjectDetail> {
     int bunk = 0;
     int miss = classes - present;
     while (true) {
-
       if (((present / (present + miss)) * 100 <= minpercent)) {
         int x = bunk - 1;
         if (x < 0) {
@@ -98,7 +97,6 @@ class _SubjectDetailState extends State<SubjectDetail> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     print('classes=====' + classes.toString());
@@ -110,155 +108,145 @@ class _SubjectDetailState extends State<SubjectDetail> {
         title: Text(subjectName),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                          height: 150,
-                          width: MediaQuery.of(context).size.width * 0.5 - 20,
-                          decoration: BoxDecoration(
-                            gradient: kOrangeGradient,
-                            borderRadius: BorderRadius.circular(12),
+            // SizedBox(
+            //   height: 20,
+            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        decoration: BoxDecoration(
+                          gradient: kOrangeGradient,
+                          borderRadius: BorderRadius.circular(12)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                  child: Text(subjectName,
+                                      style: kSubjectTextStyle)),
+                              FittedBox(
+                                child: Text(
+                                    realtimePercentage(present, classes)
+                                            .toStringAsFixed(2) +
+                                        '%',
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.black, fontSize: 35)),
+                              ),
+                            ],
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 15.0,
-                              top: 20,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                    child: Text(subjectName,
-                                        style: kSubjectTextStyle)),
-                                FittedBox(
-                                  child: Text(
-                                      realtimePercentage(present, classes)
-                                              .toStringAsFixed(2) +
-                                          '%',
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.black, fontSize: 35)),
-                                ),
-                              ],
-                            ),
-                          )),
-                      SizedBox(
-                        height: 50,
+                        )),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        //color: Colors.red,
+                        child: RichText(
+                            text: TextSpan(
+                                text: "Percentage Required: ",
+                                style: kTextStyle,
+                                children: <TextSpan>[
+                              TextSpan(
+                                text: widget.minpercent.toString() + '%',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 26,
+                                    color: kTextcolor,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ])))
+                  ],
+                ),
+                // SizedBox(
+                //   width: 15,
+                // ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.55,
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  decoration: BoxDecoration(
+                    color: kContainercolor,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    //crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircularPercentIndicator(
+                        animation: true,
+                        animationDuration: 1000,
+                        radius: 68,
+                        lineWidth: 17,
+                        center: Text(
+                          realtimePercentage(present, classes)
+                                  .toStringAsFixed(2) +
+                              '%',
+                          style: kDetailPageTextStyle,
+                        ),
+                        percent: ((realtimePercentage(present, classes) - 0) /
+                                    (100 - 0)) *
+                                (1 - 0) +
+                            0,
+                        circularStrokeCap: CircularStrokeCap.round,
+                        progressColor:
+                            (realtimePercentage(present, classes) >= 75)
+                                ? Colors.green
+                                : Colors.red,
                       ),
-                      Container(
-                          width: 175,
-                          //color: Colors.red,
-                          child: RichText(
-                              text: TextSpan(
-                                  text: "Percentage Required: ",
-                                  style: kTextStyle,
-                                  children: <TextSpan>[
-                                TextSpan(
-                                  text: widget.minpercent.toString() + '%',
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 26,
-                                      color: kTextcolor,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ])))
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Text(
+                        "Present:",
+                        style: kDetailPageTextStyle,
+                      ),
+                      ButtonRowPresent(
+                        num: present,
+                        decreaseValue: widget.decreasePresentValue,
+                        increaseValue: widget.increasePresentValue,
+                        onValueChanged: (int value) {
+                          setState(() {
+                            present = value;
+                          });
+                        },
+                        compare_num: classes,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        "Total Classes:",
+                        style: kDetailPageTextStyle,
+                      ),
+                      ButtonRowClasses(
+                        num: classes,
+                        decreaseValue: widget.decreaseClassesValue,
+                        increaseValue: widget.increaseClassesValue,
+                        onValueChanged: (int value) {
+                          setState(() {
+                            classes = value;
+                          });
+                        },
+                        compare_num: present,
+                      )
                     ],
                   ),
-                  // SizedBox(
-                  //   width: 15,
-                  // ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Container(
-                      height: 400,
-                      width: MediaQuery.of(context).size.width * 0.5 - 14,
-                      decoration: BoxDecoration(
-                        color: kContainercolor,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 11.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          //crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            CircularPercentIndicator(
-                              animation: true,
-                              animationDuration: 1000,
-                              radius: 68,
-                              lineWidth: 17,
-                              center: Text(
-                                realtimePercentage(present, classes)
-                                        .toStringAsFixed(2) +
-                                    '%',
-                                style: kDetailPageTextStyle,
-                              ),
-                              percent:
-                                  ((realtimePercentage(present, classes) - 0) /
-                                              (100 - 0)) *
-                                          (1 - 0) +
-                                      0,
-                              circularStrokeCap: CircularStrokeCap.round,
-                              progressColor:
-                                  (realtimePercentage(present, classes) >= 75)
-                                      ? Colors.green
-                                      : Colors.red,
-                            ),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            Text(
-                              "Present:",
-                              style: kDetailPageTextStyle,
-                            ),
-                            ButtonRowPresent(
-                              num: present,
-                              decreaseValue: widget.decreasePresentValue,
-                              increaseValue: widget.increasePresentValue,
-                              onValueChanged: (int value) {
-                                setState(() {
-                                  present = value;
-                                });
-                              }, compare_num: classes,
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Total Classes:",
-                              style: kDetailPageTextStyle,
-                            ),
-                            ButtonRowClasses(
-                              num: classes,
-                              decreaseValue: widget.decreaseClassesValue,
-                              increaseValue: widget.increaseClassesValue,
-                              onValueChanged: (int value) {
-                                setState(() {
-                                  classes = value;
-                                });
-                              }, compare_num: present,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: 40,
-            ),
+            // SizedBox(
+            //   height: 40,
+            // ),
             Container(
                 height: 150,
                 width: MediaQuery.of(context).size.width,

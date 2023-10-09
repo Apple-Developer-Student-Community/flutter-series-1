@@ -2,6 +2,7 @@ import 'package:community_app/Screens/Attendance/home_page.dart';
 import 'package:community_app/Screens/Timetable/timetable_home.dart';
 import 'package:community_app/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -10,11 +11,35 @@ class MyDrawer extends StatefulWidget {
   State<MyDrawer> createState() => _MyDrawerState();
 }
 
+
 class _MyDrawerState extends State<MyDrawer> {
+
+  String? userName;
+
+  @override
+  void initState() {
+    super.initState();
+    loadUserInfo();
+  }
+
+  void loadUserInfo() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('name');
+    });
+  }
+
+  Future<void> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('jwt_token');
+    prefs.remove('name');
+
+    Navigator.of(context).pushReplacementNamed('/login');
+  }
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: kDrawercolor,
+      backgroundColor: kPrimaryColor,
       child: ListView(
 
         children: [
@@ -44,7 +69,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
-                  child: Text('Coder'),
+                  child: Text(userName?? "guest"),
                 ),
 
               ],
@@ -66,6 +91,17 @@ class _MyDrawerState extends State<MyDrawer> {
                 title: Text('Home'),
 
                 leading: Icon(Icons.home_rounded),
+
+              ),
+              ListTile(
+                onTap: (){
+                 Navigator.pushReplacementNamed(context, '/profile');
+                }
+                ,
+
+                title: Text('Profile'),
+
+                leading: Icon(Icons.person),
 
               ),
 
@@ -97,12 +133,17 @@ class _MyDrawerState extends State<MyDrawer> {
 
               ),
 
-              ListTile(
-
-                title: Text('Logout'),
-
-                leading: Icon(Icons.logout),
-
+              GestureDetector(
+                onTap: () {
+                  logout();
+                },
+                child: ListTile(
+              
+                  title: Text('Logout'),
+              
+                  leading: Icon(Icons.logout),
+              
+                ),
               ),
 
             ],

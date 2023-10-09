@@ -1,6 +1,10 @@
+import 'package:community_app/Components/bottom_navigation_bar.dart';
+import 'package:community_app/Screens/Attendance/home_page.dart';
+import 'package:community_app/Screens/LoginScreen/login.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,9 +17,25 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 2), () {
-     Navigator.pushReplacementNamed(context, '/home');
-    });
+    navigateToNextScreen();
+  }
+
+  Future<void> navigateToNextScreen() async {
+    await Future.delayed(const Duration(seconds: 2)); // Change the duration as needed
+
+    final prefs = await SharedPreferences.getInstance();
+    final isLoggedIn = prefs.getString('jwt_token') != null;
+
+    Widget nextScreen;
+    if (isLoggedIn) {
+      nextScreen = MyBottomNavBar();
+    } else {
+      nextScreen = LoginScreen();
+    }
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => nextScreen),
+    );
   }
 
   @override

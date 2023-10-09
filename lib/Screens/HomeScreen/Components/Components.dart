@@ -3,22 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../utils/constants.dart';
 
 class Components {
-  static AppBar buildAppBar() {
+  static AppBar buildAppBar(BuildContext context, String? userName) {
+    
     return AppBar(
-      // leading: Container(
-      //   margin: const EdgeInsets.all(4),
-      //   padding: const EdgeInsets.all(4),
-      //   decoration: BoxDecoration(
-      //     color: kButtonBg,
-      //     borderRadius: BorderRadius.circular(15),
-      //   ),
-      //   child: IconButton(
-      //     icon: const Icon(Icons.widgets_outlined),
-      //     onPressed: () {
-      //       // todo: Ravneet add a Perform action
-      //     },
-      //   ),
-      // ),
+      title: Center(child: Text("Hi, ${userName?.split(' ')[0]}👋",style:TextStyle(fontSize: 14, fontWeight: FontWeight.w300),)),
       actions: [
         Container(
           margin: const EdgeInsets.all(2),
@@ -30,7 +18,7 @@ class Components {
           child: IconButton(
             icon: const Icon(Icons.account_circle),
             onPressed: () {
-              // todo: Ravneet add a Perform action
+              Navigator.pushReplacementNamed(context, '/profile');
             },
           ),
         ),
